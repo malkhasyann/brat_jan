@@ -18,6 +18,10 @@ def zero_division_error():
     sys.exit()
 
 
+def name_not_defined_error(n):
+    print(f"Brat jan! \"{n}\" name is not defined!")
+
+
 def already_declared_name_error(n):
     print(f"Brat jan! \"{n}\" name is busy!")
     sys.exit()

@@ -13,14 +13,17 @@ def replace_var_name_by_value(expr: str, ns: dict):
     """
     splitted_expr = expr.split()
     for i, elem in enumerate(splitted_expr):
-        if elem in ns:
-            splitted_expr[i] = str(ns[elem])
+        if elem.isalnum():
+            if elem in ns:
+                splitted_expr[i] = str(ns[elem])
+            else:
+                errors.name_not_defined_error(elem)
 
     expr = " ".join(splitted_expr)
     return expr
 
 
-def execute_expression(expr: str, ns: dict):
+def execute_expression(expr: str):
     """ Brat jan! Executes the expression.
         Arguments:
             expr -> the expression
@@ -31,6 +34,7 @@ def execute_expression(expr: str, ns: dict):
         result = str(eval(expr))
     except (SyntaxError, NameError, ValueError, ZeroDivisionError):
         errors.syntax_error()
+        result = None
 
     return result
 
@@ -49,7 +53,7 @@ def execute_assignment(instruction: str):
         errors.syntax_error()
 
     if name in states.namespace:
-        errors.already_declared_name_error()
+        errors.already_declared_name_error(name)
 
     value = execute_expression(value_expr)
     states.namespace[name] = value
