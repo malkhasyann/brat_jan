@@ -1,3 +1,11 @@
-bratjan a = 16
-bratjan i = 34
-bratwrite( a + i )
+bratjan a = 4
+# created two variables: a and b
+bratwrite('b')
+bratwrite( a )
+a = 5
+bratwrite( a )
+a = a * 2
+bratwrite( a )
+bratjan c = 4
+bratwrite( c )
+bratwrite( a > c )
