@@ -26,12 +26,11 @@ def replace_var_name_by_value(expr: str, ns=None):
     return expr
 
 
-def execute_expression(expr: str):
-    """ Brat jan! Executes the expression.
-        Arguments:
-            expr -> the expression
-            ns -> namespace of variables
-    """
+def execute_expression(expr: str, ns=None):
+    """ Brat jan! Executes the expression. """
+    if ns is None:
+        ns = states.namespace
+
     try:
         expr = replace_var_name_by_value(expr)
         result = str(eval(expr))
@@ -42,8 +41,10 @@ def execute_expression(expr: str):
     return result
 
 
-def execute_declaration_assignment(instruction: str):
+def execute_declaration_assignment(instruction: str, ns=None):
     """ Brat jan! Executes Declaration-Assignment"""
+    if ns is None:
+        ns = states.namespace
 
     splitted_instr = instruction.split('=')
     if len(splitted_instr) != 2:
@@ -55,15 +56,17 @@ def execute_declaration_assignment(instruction: str):
     if dec != 'bratjan' or not validity.is_valid_var_name(name):
         errors.syntax_error()
 
-    if name in states.namespace:
+    if name in ns:
         errors.already_declared_name_error(name)
 
     value = execute_expression(value_expr)
-    states.namespace[name] = value
+    ns[name] = value
 
 
-def execute_assignment(instruction: str):
-    """ Brat jan! Executes Assignment"""
+def execute_assignment(instruction: str, ns=None):
+    """ Brat jan! Executes Assignment. """
+    if ns is None:
+        ns = states.namespace
 
     splitted_instr = instruction.split('=')
     if len(splitted_instr) != 2:
@@ -75,8 +78,8 @@ def execute_assignment(instruction: str):
     if not validity.is_valid_var_name(name):
         errors.syntax_error()
 
-    if name not in states.namespace:
+    if name not in ns:
         errors.name_not_defined_error(name)
 
     value = execute_expression(value_expr)
-    states.namespace[name] = value
+    ns[name] = value

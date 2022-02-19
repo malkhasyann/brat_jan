@@ -19,9 +19,11 @@ if __name__ == "__main__":
     for line in source_code:
         if line.startswith('bratwrite'):  # new variable is declared and assigned
             write.execute_bratwrite(line)
-        if line.startswith('bratjan'):  # printing
+        elif line.startswith('bratjan'):  # printing
             expressions.execute_declaration_assignment(line)
-        if line.startswith('#'):  # comment line in brat jan language starts wit '#'
+        elif line.startswith('#'):  # comment line in brat jan language starts wit '#'
             continue
-        if line.split()[0] in states.namespace and '=' in line:
+        elif line.split()[0] in states.namespace and '=' in line:
             expressions.execute_assignment(line)
+        else:  # no instruction category corresponds to this line
+            errors.syntax_error()
