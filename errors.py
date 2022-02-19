@@ -3,13 +3,8 @@
 import sys
 
 
-def file_extension():
-    print('Brat jan! Brat jan files have ".bj" extension! ')
-    sys.exit()
-
-
-def file_not_found_error():
-    print("Brat jan! File not found error.")
+def source_file_error():
+    print("Brat jan! Invalid source file error.")
     sys.exit()
 
 
