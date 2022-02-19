@@ -14,8 +14,10 @@ def is_valid_source_argument():
 
 def is_valid_var_name(name: str):
     """ Brat jan! Checks whether var name is given properly. """
-    if not name.isalnum():
+    if (ord(name[0]) not in range(65, 91)
+            and ord(name[0]) not in range(97, 123)):
         return False
+
     if name in states.keywords:
         return False
     return True

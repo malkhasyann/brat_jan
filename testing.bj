@@ -1,1 +1,3 @@
-bratwrite(a + i)
+bratjan a = 16
+bratjan i = 34
+bratwrite( a + i )

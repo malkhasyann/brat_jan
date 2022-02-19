@@ -20,6 +20,7 @@ def zero_division_error():
 
 def name_not_defined_error(n):
     print(f"Brat jan! \"{n}\" name is not defined!")
+    sys.exit()
 
 
 def already_declared_name_error(n):

@@ -16,7 +16,7 @@ def replace_var_name_by_value(expr: str, ns=None):
 
     splitted_expr = expr.split()
     for i, elem in enumerate(splitted_expr):
-        if elem.isalnum():
+        if validity.is_valid_var_name(elem):
             if elem in ns:
                 splitted_expr[i] = str(ns[elem])
             else:

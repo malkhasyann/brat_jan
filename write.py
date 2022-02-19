@@ -9,9 +9,8 @@ def execute_bratwrite(instruction: str):
         errors.syntax_error()
 
     expr = instruction  # copy the instruction
-    expr.replace('bratwrite', '', 1)  # remove substring 'bratwrite'
-
-    expressions.replace_var_name_by_value(expr)
+    expr = expr.replace('bratwrite', '', 1)  # remove substring 'bratwrite'
+    expr = expressions.replace_var_name_by_value(expr)
 
     expr = str(eval(expr))  # execute the expression
     print(expr)

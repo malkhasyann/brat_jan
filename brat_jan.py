@@ -1,10 +1,8 @@
 """ Brat jan! This is the main module! """
 
-import sys
 import errors
 from validity import *
-from states import *
-import io
+import write
 import expressions
 
 if __name__ == "__main__":
@@ -19,4 +17,7 @@ if __name__ == "__main__":
 
     for line in source_code:
         if line.startswith('bratwrite'):
-            io.execute_bratwrite(line)
+            write.execute_bratwrite(line)
+        if line.startswith('bratjan'):
+            expressions.execute_declaration_assignment(line)
+
