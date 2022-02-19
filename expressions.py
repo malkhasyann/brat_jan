@@ -39,8 +39,8 @@ def execute_expression(expr: str):
     return result
 
 
-def execute_assignment(instruction: str):
-    """ Brat jan! Executes Assignment"""
+def execute_declaration_assignment(instruction: str):
+    """ Brat jan! Executes Declaration-Assignment"""
 
     splitted_instr = instruction.split('=')
     if len(splitted_instr) != 2:
@@ -58,24 +58,22 @@ def execute_assignment(instruction: str):
     value = execute_expression(value_expr)
     states.namespace[name] = value
 
-# def check_parentheses(s: str):
-#     """ Brat jan! Checks whether parentheses are putted properly.
-#         Arguments:
-#             s -> text to check : str
-#     """
-#     pt_list = []  # parentheses history list
-#     for i in s:
-#         if i == '(':
-#             pt_list.append(1)
-#         if i == ')':
-#             if len(pt_list) == 0:
-#                 return False
-#             del pt_list[0]
-#
-#     return len(pt_list) == 0
-#
-#
-# def broke_expr_by_parentheses(expr):
-#     if not check_parentheses(expr):
-#         errors.syntax_error()
-#     pass
+
+def execute_assignment(instruction: str):
+    """ Brat jan! Executes Assignment"""
+
+    splitted_instr = instruction.split('=')
+    if len(splitted_instr) != 2:
+        errors.syntax_error()
+
+    value_expr = splitted_instr[1].strip()  # value expression to be assigned in str
+    name = splitted_instr[0].strip()  # var name
+
+    if not validity.is_valid_var_name(name):
+        errors.syntax_error()
+
+    if name not in states.namespace:
+        errors.name_not_defined_error(name)
+
+    value = execute_expression(value_expr)
+    states.namespace[name] = value
