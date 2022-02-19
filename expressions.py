@@ -3,6 +3,36 @@
 import errors
 import states
 
+
+def replace_var_name_by_value(expr: str, ns: dict):
+    """ Brat Jan! Replace variable names in expressions by their values
+        Arguments:
+            expr -> the expression
+            ns -> namespace of variables
+    """
+    splitted_expr = expr.split()
+    for i, elem in enumerate(splitted_expr):
+        if elem in ns:
+            splitted_expr[i] = str(ns[elem])
+
+    expr = " ".join(splitted_expr)
+    return expr
+
+
+def execute_expression(expr: str, ns: dict):
+    """ Brat jan! Executes the expression.
+        Arguments:
+            expr -> the expression
+            ns -> namespace of variables
+    """
+    try:
+        expr = replace_var_name_by_value(expr, states.namespace)
+        result = str(eval(expr))
+    except (SyntaxError, NameError, ValueError, ZeroDivisionError):
+        errors.syntax_error()
+
+    return result
+
 #
 # def check_parentheses(s: str):
 #     """ Brat jan! Checks whether parentheses are putted properly.
@@ -25,31 +55,3 @@ import states
 #     if not check_parentheses(expr):
 #         errors.syntax_error()
 #     pass
-
-
-def replace_var_name_by_value(expr: str, ns: dict):
-    """ Brat Jan! Replace variable names in expressions by their values
-        Arguments:
-            expr -> the expression
-            ns -> namespace of variables
-    """
-    for elem in expr.split():
-        if elem in ns:
-            expr = expr.replace(elem, str(ns[elem]))
-
-    return expr
-
-
-def execute_expression(expr: str, ns: dict):
-    """ Brat jan! Executes the expression.
-        Arguments:
-            expr -> the expression
-            ns -> namespace of variables
-    """
-    try:
-        expr = replace_var_name_by_value(expr, states.namespace)
-        result = str(eval(expr))
-    except (SyntaxError, NameError, ValueError, ZeroDivisionError):
-        errors.syntax_error()
-
-    return result
