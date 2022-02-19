@@ -4,6 +4,8 @@ import sys
 import errors
 from validity import *
 from states import *
+import io
+import expressions
 
 if __name__ == "__main__":
     if is_valid_source_argument():
@@ -16,4 +18,5 @@ if __name__ == "__main__":
         source_code = file.readlines()
 
     for line in source_code:
-        print(line)
+        if line.startswith('bratwrite'):
+            io.execute_bratwrite(line)

@@ -1,5 +1,7 @@
 """ Brat jan! This is a module for a print function. """
+
 import errors
+import expressions
 
 
 def execute_bratwrite(instruction: str):
@@ -8,6 +10,9 @@ def execute_bratwrite(instruction: str):
 
     expr = instruction  # copy the instruction
     expr.replace('bratwrite', '', 1)  # remove substring 'bratwrite'
+
+    expressions.replace_var_name_by_value(expr)
+
     expr = str(eval(expr))  # execute the expression
     print(expr)
 

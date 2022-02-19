@@ -5,12 +5,15 @@ import states
 import validity
 
 
-def replace_var_name_by_value(expr: str, ns: dict):
+def replace_var_name_by_value(expr: str, ns=None):
     """ Brat Jan! Replace variable names in expressions by their values
         Arguments:
             expr -> the expression
             ns -> namespace of variables
     """
+    if ns is None:
+        ns = states.namespace
+
     splitted_expr = expr.split()
     for i, elem in enumerate(splitted_expr):
         if elem.isalnum():
@@ -30,7 +33,7 @@ def execute_expression(expr: str):
             ns -> namespace of variables
     """
     try:
-        expr = replace_var_name_by_value(expr, states.namespace)
+        expr = replace_var_name_by_value(expr)
         result = str(eval(expr))
     except (SyntaxError, NameError, ValueError, ZeroDivisionError):
         errors.syntax_error()
