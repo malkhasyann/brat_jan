@@ -16,16 +16,20 @@ def execute_bratwrite(instruction: str):
     print(expr)
 
 
-def check_parentheses(s: str):
+def check_parentheses(s: str, p_type=None):
     """ Brat jan! Checks whether parentheses are putted properly.
         Arguments:
             s -> text to check : str
+            p_type -> parenthese type
     """
+    if p_type is None:
+        p_type = ['(', ')']
+
     pt_list = []  # parentheses history list
     for i in s:
-        if i == '(':
+        if i == p_type[0]:
             pt_list.append(1)
-        if i == ')':
+        if i == p_type[1]:
             if len(pt_list) == 0:
                 return False
             del pt_list[0]
