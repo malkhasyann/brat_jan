@@ -1,6 +1,7 @@
 """ Brat jan! This module is for validity checkers. """
 
 import sys
+import states
 
 
 def is_valid_source_argument():
@@ -14,5 +15,7 @@ def is_valid_source_argument():
 def is_valid_var_name(name: str):
     """ Brat jan! Checks whether var name is given properly. """
     if not name.isalnum():
+        return False
+    if name in states.keywords:
         return False
     return True
