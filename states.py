@@ -5,4 +5,4 @@ namespace = dict()  # namespace for variables
 source_code = ""  # keeping whole code
 
 keywords = ['if', 'elif', 'else', 'while', 'not', 'and', 'or',
-            'bratjan', 'bratlsi']
+            'bratjan', 'bratwrite']

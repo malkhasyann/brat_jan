@@ -10,6 +10,7 @@ if __name__ == "__main__":
         filename = sys.argv[1]
     else:
         errors.source_file_error()
+        filename = None
 
     with open(filename, 'r', encoding='utf-8') as file:
         source_code = file.readlines()
