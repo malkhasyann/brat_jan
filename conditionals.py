@@ -5,11 +5,10 @@ import sys
 import expressions
 import states
 import errors
-import validity
 import bodies
 
 
-def if_condition(index, line):
+def if_execution(index, line):
     splitted_line = line.split()
 
     if splitted_line[0] != 'if':
@@ -25,7 +24,7 @@ def if_condition(index, line):
     final_index = if_next_index
 
     if states.source_code[if_next_index].startswith('else'):
-        else_instructions, else_next_index = else_condition(if_next_index)
+        else_instructions, else_next_index = else_execution(if_next_index)
         final_index = else_next_index
 
     if value == 'True':
@@ -36,7 +35,7 @@ def if_condition(index, line):
     return final_index  # from where to continue execution on Global Loop
 
 
-def else_condition(index):
+def else_execution(index):
     splitted_line = states.source_code[index].split()
 
     if splitted_line[0] != 'else':

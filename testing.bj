@@ -1,17 +1,16 @@
 # Brat jan! first program
 # Checking whether given number is even or odd
 
-bratjan num = 0
+bratjan num = 13
 if num % 2 == 0
 {
     bratwrite( "EVEN" )
-    bratjan local_i = 45
-    bratwrite( local_i )
+    if num % 7 == 0
+    {
+        bratwrite( "Nested Loop!" )
+    }
 }
 else
 {
     bratwrite( "ODD" )
 }
-
-bratwrite( local_i )
-bratwrite( "HEY!!!" )

@@ -1,5 +1,5 @@
 """ Brat jan! This is a module for execution code bodies. """
-
+import conditionals
 import expressions
 import errors
 import states
@@ -37,7 +37,10 @@ def body(lines: str):
     local_namespace = dict()  # creating new local namespace for this code block
     states.namespace_stack.append(local_namespace)  # appending current local namespace to the stack
 
-    for line in lines:
+    index = 0
+    while index < len(lines):
+        line = lines[index]
+
         if line.startswith('bratwrite'):  # new variable is declared and assigned
             write.execute_bratwrite(line)
         elif line.startswith('bratjan'):  # printing
@@ -50,6 +53,11 @@ def body(lines: str):
                 if name in ns:
                     expressions.execute_assignment(line, ns)
                     break
+        elif line.split()[0] == 'if':
+            index = conditionals.if_execution(index, line)
+            continue
         else:  # no instruction category corresponds to this line
             errors.syntax_error()
+
+        index += 1
     states.namespace_stack.pop()

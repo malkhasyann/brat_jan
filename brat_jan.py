@@ -1,6 +1,7 @@
 """ Brat jan! This is the main module! """
 
 import errors
+import loops
 import states
 from validity import *
 import write
@@ -33,8 +34,10 @@ if __name__ == "__main__":
         elif line.split()[0] in states.namespace and '=' in line:
             expressions.execute_assignment(line)
         elif line.split()[0] == 'if':
-            index = conditionals.if_condition(index, line)
+            index = conditionals.if_execution(index, line)
             continue
+        elif line.split()[0] == 'while':
+            index, state = loops.while_execution(index, line)
         else:  # no instruction category corresponds to this line
             errors.syntax_error()
 
