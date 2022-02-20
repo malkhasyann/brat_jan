@@ -17,5 +17,7 @@ def if_condition(index, line):
 
     value = expressions.execute_expression(" ".join(splitted_line[1:]))
     if value:
-        instructions = bodies.define_body(index, line)
+        instructions = bodies.define_body(index + 1)
         bodies.body(instructions)
+    else:  # searching else statement
+        pass

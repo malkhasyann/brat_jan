@@ -17,7 +17,10 @@ if __name__ == "__main__":
     with open(filename, 'r', encoding='utf-8') as file:
         source_code = file.readlines()
 
-    for index, line in enumerate(source_code):
+    index = 0
+    while index < len(source_code):
+        line = source_code[index]  # holding current code line by its index
+
         if line.startswith('bratwrite'):  # new variable is declared and assigned
             write.execute_bratwrite(line)
         elif line.startswith('bratjan'):  # printing
@@ -30,3 +33,5 @@ if __name__ == "__main__":
             conditionals.if_condition(index, line)
         else:  # no instruction category corresponds to this line
             errors.syntax_error()
+
+        index += 1  # go to newline index

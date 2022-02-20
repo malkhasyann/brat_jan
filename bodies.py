@@ -8,20 +8,20 @@ import write
 namespace_stack = [states.namespace, ]  # stacking local namespaces
 
 
-def define_body(index, line):
+def define_body(index):
     """ Brat jan! Defines code body.
         Arguments:
               index -> current line index: int
-              line -> current line: str
+        Returns body_code: str
     """
     body_code = []  # resulting code segment
 
-    if states.source_code[index + 1].strip() != '{':
+    if states.source_code[index].strip() != '{':
         errors.syntax_error()
 
-    i = 2
+    i = 1  # line index counter
     try:
-        while states.source_code[index + i] != '}':
+        while states.source_code[index + i].strip() != '}':
             body_code.append(states.source_code[index + i].strip())
             i += 1
     except IndexError:
