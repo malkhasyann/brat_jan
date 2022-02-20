@@ -26,7 +26,7 @@ def if_condition(index, line):
 
     if states.source_code[if_next_index].startswith('else'):
         else_instructions, else_next_index = else_condition(if_next_index)
-        final_index += else_next_index
+        final_index = else_next_index
 
     if value == 'True':
         bodies.body(if_instructions)

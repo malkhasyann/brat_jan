@@ -1,8 +1,17 @@
-bratjan point1 = ( 16 + 4 ) * 5
-bratjan point2 = 43 / 5
-if point1 > point2
+# Brat jan! first program
+# Checking whether given number is even or odd
+
+bratjan num = 0
+if num % 2 == 0
 {
-    bratwrite( point1 )
-    point1 = 116
+    bratwrite( "EVEN" )
+    bratjan local_i = 45
+    bratwrite( local_i )
 }
-bratwrite( point1 )
+else
+{
+    bratwrite( "ODD" )
+}
+
+bratwrite( local_i )
+bratwrite( "HEY!!!" )
