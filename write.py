@@ -10,7 +10,6 @@ def execute_bratwrite(instruction: str):
 
     expr = instruction  # copy the instruction
     expr = expr.replace('bratwrite', '', 1)  # remove substring 'bratwrite'
-    expr = expr[1:-1]  # removing bratwrite function brackets
     expr = expressions.replace_var_name_by_value(expr)
 
     expr = str(eval(expr))  # execute the expression

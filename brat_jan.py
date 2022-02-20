@@ -15,22 +15,26 @@ if __name__ == "__main__":
         filename = None
 
     with open(filename, 'r', encoding='utf-8') as file:
-        source_code = file.readlines()
+        states.source_code = file.readlines()
+        states.source_code.append('')
 
     index = 0
-    while index < len(source_code):
-        line = source_code[index]  # holding current code line by its index
+    while index < len(states.source_code):
+        line = states.source_code[index]  # holding current code line by its index
 
         if line.startswith('bratwrite'):  # new variable is declared and assigned
             write.execute_bratwrite(line)
         elif line.startswith('bratjan'):  # printing
             expressions.execute_declaration_assignment(line)
         elif line.startswith('#'):  # comment line in brat jan language starts wit '#'
-            continue
+            pass
+        elif line.strip() == '':  # empty line
+            pass
         elif line.split()[0] in states.namespace and '=' in line:
             expressions.execute_assignment(line)
         elif line.split()[0] == 'if':
-            conditionals.if_condition(index, line)
+            index = conditionals.if_condition(index, line)
+            continue
         else:  # no instruction category corresponds to this line
             errors.syntax_error()
 

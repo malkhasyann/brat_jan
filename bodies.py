@@ -24,10 +24,11 @@ def define_body(index):
         while states.source_code[index + i].strip() != '}':
             body_code.append(states.source_code[index + i].strip())
             i += 1
+        i += 1
     except IndexError:
         errors.syntax_error()
 
-    return body_code
+    return body_code, (index + i)
 
 
 def body(lines: str):
@@ -45,7 +46,7 @@ def body(lines: str):
             expressions.execute_declaration_assignment(line, local_namespace)
         elif line.startswith('#'):  # comment line in brat jan language starts wit '#'
             continue
-        if '=' in line:
+        if '=' == line.split()[1]:
             name = line.split()[0]
             for ns in range(len(namespace_stack), -1, -1):
                 if name in ns:

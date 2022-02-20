@@ -16,8 +16,33 @@ def if_condition(index, line):
         errors.syntax_error()
 
     value = expressions.execute_expression(" ".join(splitted_line[1:]))
-    if value:
-        instructions = bodies.define_body(index + 1)
-        bodies.body(instructions)
-    else:  # searching else statement
-        pass
+
+    if_instructions, if_next_index = bodies.define_body(index + 1)  # instructions, next code segment starting index
+
+    else_instructions = None
+    else_next_index = None
+
+    final_index = if_next_index
+
+    if states.source_code[if_next_index].startswith('else'):
+        else_instructions, else_next_index = else_condition(if_next_index, line)
+
+    if value == 'True':
+        bodies.body(if_instructions)
+        final_index = if_next_index
+    elif else_instructions is not None:
+        bodies.body(else_instructions)
+        final_index = else_next_index
+
+    return final_index  # from where to continue execution on Global Loop
+
+
+def else_condition(index, line):
+    splitted_line = line.split()
+
+    if splitted_line[0] != 'else':
+        errors.syntax_error()
+
+    body_code, next_index = bodies.define_body(index + 1)
+
+    return body_code, next_index

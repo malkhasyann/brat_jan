@@ -15,6 +15,29 @@ def replace_var_name_by_value(expr: str, ns=None):
         ns = states.namespace
 
     splitted_expr = expr.split()
+
+    # for printing string literal
+
+    string_elements = []
+    is_string = False
+    start_index = -1
+    end_index = -1
+    i = 0
+    while i < len(splitted_expr):
+        if splitted_expr[i].startswith('"'):
+            start_index = i
+            is_string = True
+        if is_string:
+            string_elements.append(splitted_expr[i])
+        if splitted_expr[i].endswith('"'):
+            end_index = i
+            break
+        i += 1
+    string = " ".join(string_elements)
+    del splitted_expr[start_index: end_index + 1]
+    if len(string) > 0:
+        splitted_expr.insert(start_index, string)
+
     for i, elem in enumerate(splitted_expr):
         if validity.is_valid_var_name(elem):
             if elem in ns:
