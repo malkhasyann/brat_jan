@@ -1,10 +1,8 @@
 bratjan point1 = ( 16 + 4 ) * 5
 bratjan point2 = 43 / 5
-if point1 < point2
+if point1 > point2
 {
     bratwrite( point1 )
+    point1 = 116
 }
-else
-{
-    bratwrite( point2 )
-}
+bratwrite( point1 )

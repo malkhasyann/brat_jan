@@ -46,7 +46,7 @@ def body(lines: str):
             continue
         elif '=' == line.split()[1]:
             name = line.split()[0]
-            for ns in range(len(states.namespace_stack), -1, -1):
+            for ns in reversed(states.namespace_stack):
                 if name in ns:
                     expressions.execute_assignment(line, ns)
                     break
