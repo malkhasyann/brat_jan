@@ -8,8 +8,26 @@ import write
 namespace_stack = [states.namespace, ]  # stacking local namespaces
 
 
-def define_body():
-    pass
+def define_body(index, line):
+    """ Brat jan! Defines code body.
+        Arguments:
+              index -> current line index: int
+              line -> current line: str
+    """
+    body_code = []  # resulting code segment
+
+    if states.source_code[index + 1].strip() != '{':
+        errors.syntax_error()
+
+    i = 2
+    try:
+        while states.source_code[index + i] != '}':
+            body_code.append(states.source_code[index + i].strip())
+            i += 1
+    except IndexError:
+        errors.syntax_error()
+
+    return body_code
 
 
 def body(lines: str):
@@ -18,7 +36,7 @@ def body(lines: str):
             lines -> code segment text: str
     """
     local_namespace = dict()  # creating new local namespace for this code block
-    namespace_stack.append(local_namespace) # appending current local namespace to the stack
+    namespace_stack.append(local_namespace)  # appending current local namespace to the stack
 
     for line in lines:
         if line.startswith('bratwrite'):  # new variable is declared and assigned

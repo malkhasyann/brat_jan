@@ -1,11 +1,3 @@
 bratjan a = 4
-# created two variables: a and b
-bratwrite('b')
-bratwrite( a )
-a = 5
-bratwrite( a )
-a = a * 2 + 1
-bratwrite( a )
-bratjan c = 4
-bratwrite( c )
-bratwrite( a > c )
+bratjan b = 5
+bratwrite("hello")

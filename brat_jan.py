@@ -5,6 +5,7 @@ import states
 from validity import *
 import write
 import expressions
+import conditionals
 
 if __name__ == "__main__":
     if is_valid_source_argument():
@@ -16,7 +17,7 @@ if __name__ == "__main__":
     with open(filename, 'r', encoding='utf-8') as file:
         source_code = file.readlines()
 
-    for line in source_code:
+    for index, line in enumerate(source_code):
         if line.startswith('bratwrite'):  # new variable is declared and assigned
             write.execute_bratwrite(line)
         elif line.startswith('bratjan'):  # printing
@@ -25,5 +26,7 @@ if __name__ == "__main__":
             continue
         elif line.split()[0] in states.namespace and '=' in line:
             expressions.execute_assignment(line)
+        elif line.split()[0] == 'if':
+            conditionals.if_condition(index, line)
         else:  # no instruction category corresponds to this line
             errors.syntax_error()

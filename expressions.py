@@ -31,6 +31,10 @@ def execute_expression(expr: str, ns=None):
     if ns is None:
         ns = states.namespace
 
+    # if the value is string, not to lose its quotes
+    if expr.startswith('"') and expr.endswith('"'):
+        return expr
+
     try:
         expr = replace_var_name_by_value(expr)
         result = str(eval(expr))
