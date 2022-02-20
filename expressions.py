@@ -9,10 +9,12 @@ def replace_var_name_by_value(expr: str, ns=None):
     """ Brat Jan! Replace variable names in expressions by their values
         Arguments:
             expr -> the expression
-            ns -> namespace of variables
+            ns -> namespace stack of variables
     """
     if ns is None:
-        ns = states.namespace
+        ns = states.namespace_stack
+    else:
+        ns = [ns, ]
 
     splitted_expr = expr.split()
 
@@ -40,8 +42,10 @@ def replace_var_name_by_value(expr: str, ns=None):
 
     for i, elem in enumerate(splitted_expr):
         if validity.is_valid_var_name(elem):
-            if elem in ns:
-                splitted_expr[i] = str(ns[elem])
+            for namespace in reversed(ns):
+                if elem in namespace:
+                    splitted_expr[i] = str(namespace[elem])
+                    break
             else:
                 errors.name_not_defined_error(elem)
 
@@ -52,7 +56,9 @@ def replace_var_name_by_value(expr: str, ns=None):
 def execute_expression(expr: str, ns=None):
     """ Brat jan! Executes the expression. """
     if ns is None:
-        ns = states.namespace
+        ns = states.namespace_stack
+    else:
+        ns = [ns, ]
 
     # if the value is string, not to lose its quotes
     if expr.startswith('"') and expr.endswith('"'):
@@ -71,7 +77,9 @@ def execute_expression(expr: str, ns=None):
 def execute_declaration_assignment(instruction: str, ns=None):
     """ Brat jan! Executes Declaration-Assignment"""
     if ns is None:
-        ns = states.namespace
+        ns = states.namespace_stack
+    else:
+        ns = [ns, ]
 
     splitted_instr = instruction.split('=')
     if len(splitted_instr) != 2:
@@ -83,17 +91,19 @@ def execute_declaration_assignment(instruction: str, ns=None):
     if dec != 'bratjan' or not validity.is_valid_var_name(name):
         errors.syntax_error()
 
-    if name in ns:
+    if name in ns[-1]:
         errors.already_declared_name_error(name)
 
     value = execute_expression(value_expr)
-    ns[name] = value
+    ns[-1][name] = value
 
 
 def execute_assignment(instruction: str, ns=None):
     """ Brat jan! Executes Assignment. """
     if ns is None:
-        ns = states.namespace
+        ns = states.namespace_stack
+    else:
+        ns = [ns, ]
 
     splitted_instr = instruction.split('=')
     if len(splitted_instr) != 2:
@@ -105,8 +115,8 @@ def execute_assignment(instruction: str, ns=None):
     if not validity.is_valid_var_name(name):
         errors.syntax_error()
 
-    if name not in ns:
+    if name not in ns[-1]:
         errors.name_not_defined_error(name)
 
     value = execute_expression(value_expr)
-    ns[name] = value
+    ns[-1][name] = value

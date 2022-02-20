@@ -1,3 +1,10 @@
-bratjan name = "shant jan barev"
-bratwrite( name )
-bratwrite( "shant jan barev" )
+bratjan point1 = ( 16 + 4 ) * 5
+bratjan point2 = 43 / 5
+if point1 < point2
+{
+    bratwrite( point1 )
+}
+else
+{
+    bratwrite( point2 )
+}
