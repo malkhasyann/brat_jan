@@ -37,7 +37,7 @@ if __name__ == "__main__":
             index = conditionals.if_execution(index, line)
             continue
         elif line.split()[0] == 'while':
-            index, state = loops.while_execution(index, line)
+            index = loops.while_execution(index, line)
         else:  # no instruction category corresponds to this line
             errors.syntax_error()
 

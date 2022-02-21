@@ -2,15 +2,16 @@
 # Checking whether given number is even or odd
 
 bratjan num = 13
+
 if num % 2 == 0
 {
     bratwrite( "EVEN" )
-    if num % 7 == 0
-    {
-        bratwrite( "Nested Loop!" )
-    }
 }
-else
+
+bratjan i = 0
+while i < 4
 {
-    bratwrite( "ODD" )
+    bratjan j = 42
+    bratwrite( i + j )
+    i = i + 1
 }
