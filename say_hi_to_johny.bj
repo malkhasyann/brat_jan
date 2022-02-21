@@ -1,0 +1,16 @@
+# Greeting Johny depending daytime
+
+bratjan daytime = "afternoon"
+
+if daytime == "morning"
+{
+    bratwrite( "Good morning, dear Johny" )
+}
+if daytime == "afternoon"
+{
+    bratwrite( "Good afternoon, dear Johny" )
+}
+if daytime == "evening"
+{
+    bratwrite( "Good evening, dear Johny" )
+}

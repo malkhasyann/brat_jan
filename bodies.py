@@ -1,34 +1,10 @@
 """ Brat jan! This is a module for execution code bodies. """
+
 import conditionals
 import expressions
 import errors
 import states
 import write
-
-
-def define_inner_body(index, code):
-    body_code = []  # resulting code segment
-
-    if code[index].strip() != '{':
-        errors.syntax_error()
-
-    opening_brackets = [1]
-
-    i = 1  # line index counter
-    try:
-        while not (code[index + i].strip() == '}' and len(opening_brackets) == 1 and i != 1):
-            line = code[index + i]
-            body_code.append(line.strip())
-            if line.strip() == '{':
-                opening_brackets.append(1)
-            elif line.strip() == '}':
-                del opening_brackets[-1]
-            i += 1
-        i += 1
-    except IndexError:
-        errors.syntax_error()
-
-    return body_code, (index + i)
 
 
 def define_body(index):

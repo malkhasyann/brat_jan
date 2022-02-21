@@ -19,6 +19,8 @@ if __name__ == "__main__":
         states.source_code = file.readlines()
         states.source_code.append('')
 
+    states.body_stack.append(states.source_code)
+
     index = 0
     while index < len(states.source_code):
         line = states.source_code[index]  # holding current code line by its index

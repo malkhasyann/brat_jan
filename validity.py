@@ -1,4 +1,4 @@
-""" Brat jan! This module is for validity checkers. """
+""" Brat jan! This module is for validity checkings. """
 
 import sys
 import states
@@ -6,8 +6,8 @@ import states
 
 def is_valid_source_argument():
     """ Brat jan! Checks whether source code argument is passed properly. """
-
-    if len(sys.argv) == 2 and sys.argv[1].split('.')[-1] == 'bj':
+    splitted_filename = sys.argv[1].split('.')
+    if len(sys.argv) == 2 and len(splitted_filename) == 2 and splitted_filename[-1] == 'bj':
         return True
     return False
 

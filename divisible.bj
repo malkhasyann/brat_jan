@@ -1,0 +1,13 @@
+# Check whether number divides on another number
+
+bratjan num = 44
+bratjan divisor = 7
+
+if num % divisor == 0
+{
+    bratwrite( "YES" )
+}
+else
+{
+    bratwrite( "NO" )
+}

@@ -1,17 +1,49 @@
-# Brat jan! first program
-# Checking whether given number is even or odd
+# Checking everything
 
-bratjan num = 13
+bratjan name = "Vaxo"
+bratjan age1 = 15
+bratjan age2 = 35
 
-if num % 2 == 0
+age1 = ( age2 - 10 ) * 2
+
+bratwrite( name )
+bratwrite( age1 + age2 )
+bratwrite( "string literal" )
+bratwrite( ( 45 + 44 ) * 2 )
+
+bratjan condition = 100 > 80
+
+if condition
 {
-    bratwrite( "EVEN" )
+    bratwrite( "if statement with condition literal" )
+}
+else
+{
+    bratwrite( "else statement with condition literal" )
 }
 
-bratjan i = 0
-while i < 4
+if age1 > age2
 {
-    bratjan j = 42
-    bratwrite( i + j )
-    i = i + 1
+    bratjan local_var = 44
+    bratwrite( "age condition working properly" )
+    bratwrite( age1 , age2 )
+    bratwrite( local_var )
+    local_var = 55
+    bratwrite( local_var )
+    bratwrite()
+    age1 = 100
+}
+else
+{
+    bratwrite( "age condition else block" )
+}
+
+bratwrite( age1 )
+bratwrite( age2 )
+
+bratjan counter = 0
+while counter < 20 / 5
+{
+    bratwrite( counter )
+    counter = counter + 1
 }

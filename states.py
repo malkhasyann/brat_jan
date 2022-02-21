@@ -1,4 +1,4 @@
-""" Brat jan! This module keeps dynamic data"""
+""" Brat jan! This module keeps dynamic data. """
 
 filename = ""  # source file name
 namespace = dict()  # namespace for variables

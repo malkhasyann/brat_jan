@@ -26,3 +26,8 @@ def name_not_defined_error(n):
 def already_declared_name_error(n):
     print(f"Brat jan! \"{n}\" name is busy!")
     sys.exit()
+
+
+def total_crash():
+    print("Brat jan! Zgush exi, nurb gorciq a...")
+    sys.exit()
